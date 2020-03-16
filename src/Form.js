@@ -28,7 +28,6 @@ export default class InputForm extends React.Component {
         // eslint-disable-next-line
         const emailreg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         const {name, email, fact} = this.state;
-        console.log(fact);
         if(name===''){
             temp = true;
             this.setState({ nameError: 'Please enter a name.' });
@@ -72,7 +71,7 @@ export default class InputForm extends React.Component {
                         this.setState({serverError: "Server warming up, thank you for your patience " + this.state.name});
                     }
                     else if (data.name === this.state.name && data.email === this.state.email && data.funfact === this.state.fact){
-                        console.log(data, "SUCCESS");
+                        console.log(data);
                         ReactDOM.findDOMNode(this.messageForm).reset();
                         window.alert("Thank you for your fact, " + this.state.name);
                     }
