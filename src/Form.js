@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Row } from "react-bootstrap";
-
+import {Container, Row, Col} from "react-bootstrap";
+import './Forms.css';
 
 export default class InputForm extends React.Component {
     state = {
@@ -86,41 +86,49 @@ export default class InputForm extends React.Component {
     renderError = (e) => {
         const err = e;
         if(err!==''){
-            return <div>{err}<br></br></div>;
+            return <div className='Error'>{err}</div>;
         }
+        return <div></div>;
       }
 
     render(){
         return(
-            <Form 
-                id='myForm'
-                className="form"
-                ref={ form => this.messageForm = form }
-                onSubmit={ this.onSubmit.bind( this ) }
-            >
-                <Form.Group as={Row} md="1" controlId="formName">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control name="name" type="text" placeholder="Name" onChange={(e) => this.onChange(e)}/>
-                </Form.Group>
-                {this.renderError(this.state.nameError)}
-                <Form.Group as={Row} md="3" controlId="formEmail">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control name="email" type="text" placeholder="Email" onChange={(e) => this.onChange(e)}/>
-                </Form.Group>
-                {this.renderError(this.state.emailError)}
-                <Form.Group as={Row} md="5" controlId="formFact">
-                    <Form.Label>Fun Fact</Form.Label>
-                    <Form.Control name="fact" type="text" placeholder="Fun Fact" onChange={(e) => this.onChange(e)}/>
-                </Form.Group>
-                {this.renderError(this.state.factError)}
-
-                {this.renderError(this.state.serverError)}
-                <Button 
-                    type="submit"
-                    onClick={(e) => this.onSubmit(e)}>
-                    Submit
-                </Button>
-            </Form>
+            <Container as={Col} style={{display: 'flex', verticalAlign: 'center',}}>
+                <Form 
+                    id='myForm'
+                    className="form"
+                    style = {{width:'inherit',}}
+                    ref={ form => this.messageForm = form }
+                    onSubmit={ this.onSubmit.bind( this ) }
+                >
+                    <Form.Group as={Row} md="1" controlId="formName">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control name="name" type="text" placeholder="Name" onChange={(e) => this.onChange(e)}/>
+                        {this.renderError(this.state.nameError)}
+                    </Form.Group>
+                    <Form.Group as={Row} md="3" controlId="formEmail">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control name="email" type="text" placeholder="Email" onChange={(e) => this.onChange(e)}/>
+                        {this.renderError(this.state.emailError)}
+                    </Form.Group>
+                    <Form.Group as={Row} md="5" controlId="formFact">
+                        <Form.Label>Fun Fact</Form.Label>
+                        <Form.Control as="textarea" style={{resize: 'none'}} rows="3" name="fact" type="text" placeholder="Fun Fact" onChange={(e) => this.onChange(e)}/>
+                        {this.renderError(this.state.factError)}
+                        {this.renderError(this.state.serverError)}
+                    </Form.Group>
+                    <div className='WhiteSpace'></div>
+                    <div className="textRight">
+                        <Button
+                            type="submit"
+                            variant="primary"
+                            className="Submit"
+                            onClick={(e) => this.onSubmit(e)}>
+                            Submit
+                        </Button>
+                    </div>
+                </Form>
+            </Container>
         )
     }
   }
